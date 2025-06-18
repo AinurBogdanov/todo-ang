@@ -1,0 +1,22 @@
+<div class="themes">
+  <div class="theme first-theme"></div>
+  <div class="theme second-theme"></div>
+  <div class="theme third-theme"></div>
+</div>
+<h1 class="moto">Just do it.|</h1>
+<div class="input-cont">
+  <input
+    class="todo-input"
+    type="text"
+    placeholder="Add a task."
+    #input
+  >
+  <button 
+    class="add-todo-btn"
+    (click)="addTodo(input.value)"
+  >
+    I Got This!
+  </button>
+</div>
+<div class="time">11/17/20, 9:20:59 PM</div>
+<app-todo-list [todoList]="todos"></app-todo-list>

@@ -1,1 +1,55 @@
-/* You can add global styles to this file, and also import other style files */
+@import './fonts.scss';
+@import './reset.scss';
+
+:root {
+  --dark-blue-color: #0D3241;
+  --dirty-gray-color: #525455;
+  --skin-color: #FFDFDB;
+  --dark-color: #181A1A;
+  --dark-gray-color:  #242E33;
+  --white-color: white;
+  --btn-color: #8F9093;
+  --btn-shine-color: #949FA4;
+}
+
+body {
+  height: 100vh;
+  font-family: 'Work Sans', sans-serif, Arial;
+}
+
+.themes {
+  align-self: flex-end;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 70px;
+}
+
+.theme {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgb(252, 252, 252);
+  cursor: pointer;
+}
+.first-theme {
+  background-image: linear-gradient(
+    to right, 
+    var(--dark-blue-color),
+    var(--dirty-gray-color)
+  );
+}
+.second-theme {
+  background-image: linear-gradient(
+    to right, 
+    var(--dark-blue-color),
+    var(--dirty-gray-color)
+  );
+}
+
+.third-theme {
+  background-image: linear-gradient(
+    to right, 
+    var(--dark-blue-color),
+    var(--dirty-gray-color)
+  );
+}

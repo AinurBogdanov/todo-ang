@@ -1,0 +1,49 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    to right, 
+    var(--dark-blue-color),
+    var(--dirty-gray-color)
+  );
+  padding: 30px 50px;
+}
+.moto {
+  font-size: 100px;
+  color: var(--skin-color);
+  margin-bottom: 85px;
+}
+.todo-input {
+  background-color: var(--dark-color);
+  border: none;
+  height: 50px;
+  width: 625px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  color: var(--white-color);
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+.input-cont {
+  white-space: nowrap;
+}
+.add-todo-btn {
+  height: 50px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border: none;
+  width: 125px;
+  background-color: var(--skin-color);
+  font-weight: 600;
+  cursor: pointer;
+}
+.time {
+  color: var(--skin-color);
+  font-size: 17px;
+  margin-bottom: 25px;
+}
+

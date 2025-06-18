@@ -1,0 +1,60 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.todo {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  font-weight: 600;
+  background-color: var(--dark-gray-color);
+  width: 425px;
+  border-radius: 25px;
+}
+.todo__task {
+  position: relative;
+  font-size: 20px;
+  color: var(--skin-color);
+}
+.todo__task::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 43%;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition: width 0.5s ease;
+}
+.striked::after {
+  width: 100%;
+}
+.todo__controller {
+  display: flex;
+  gap: 10px;
+}
+.btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--btn-color);
+  padding: 3px;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: var(--btn-shine-color);
+}
+.btn:active {
+  box-shadow: 0px 0px 10px var(--btn-shine-color);
+}
+.btn--done::after {
+  content: '';
+  display: block;
+  width: 15px;
+  height: 9px; 
+  transform: rotate(320deg) translateX(5px) translateY(1px);
+  border-bottom: 4px solid black;
+  border-left: 3px solid black;
+}
