@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { TodoListComponent } from "../../common-ui/todo-list/todo-list.component";
 import { Todo } from '../../interfaces/todo';
 import { StorageService } from '../../services/storage.service';
+import { v4 as uuidv4 } from 'uuid';
+
 
 @Component({
   selector: 'app-main-page',
@@ -19,7 +21,7 @@ export class MainPageComponent {
 
   addTodo(task: string) {
     const newTodo = {
-      id: this.todos.length + 1,
+      id: uuidv4(),
       task: task,
       isDone: false
     };
