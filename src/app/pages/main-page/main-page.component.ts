@@ -23,10 +23,12 @@ export class MainPageComponent {
       task: task,
       isDone: false
     };
-
     this.todos = [...this.todos, newTodo];
-
     this.storageService.saveToStorage(this.todos)
+  }
+
+  onUpdate(newVal: Todo[]) {
+    this.todos = newVal
   }
 }
 

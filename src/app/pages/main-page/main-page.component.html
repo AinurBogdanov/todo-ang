@@ -19,4 +19,7 @@
   </button>
 </div>
 <div class="time">11/17/20, 9:20:59 PM</div>
-<app-todo-list [todoList]="todos"></app-todo-list>
+<app-todo-list
+ [todoList]="todos"
+ (updateList)="onUpdate($event)"
+></app-todo-list>

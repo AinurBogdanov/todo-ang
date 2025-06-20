@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Todo } from '../../interfaces/todo';
 import { StorageService } from '../../services/storage.service';
 
@@ -10,7 +10,9 @@ import { StorageService } from '../../services/storage.service';
 })
 export class TodoListComponent {
   @Input() todoList: Todo[] = []
-  
+  @Output() updateList = new EventEmitter<Todo[]>()
+
+
   constructor(private storageService: StorageService) {}
 
   markAsDone(todo: Todo) {
@@ -27,7 +29,13 @@ export class TodoListComponent {
 
     this.todoList = newList;
     this.storageService.saveToStorage(this.todoList);
+
+    this.updateParent();
+    console.log(this.todoList)
     //сделать эмит события для того чтобы туду удалялся из обоих переменных
   }
 
+  updateParent() {
+    this.updateList.emit(this.todoList)
+  }  
 }
