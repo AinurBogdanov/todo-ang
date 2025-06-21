@@ -7,14 +7,15 @@
   display: flex;
   justify-content: space-between;
   padding: 10px 15px;
-  font-weight: 600;
-  background-color: var(--dark-gray-color);
+  background-color: var(--todo-bg-color);
   width: 425px;
   border-radius: 25px;
 }
 .todo__task {
   position: relative;
+  font-weight: 400;
   font-size: 20px;
+  color: var(--task-text-color);
   color: var(--skin-color);
 }
 .todo__task::after {
@@ -28,7 +29,7 @@
   transition: width 0.5s ease;
 }
 .striked::after {
-  width: 100%;
+  width: 100%; 
 }
 .todo__controller {
   display: flex;
@@ -39,9 +40,10 @@
   height: 30px;
   border-radius: 50%;
   border: none;
-  background-color: var(--btn-color);
+  background-color: var(--btn-bg-color);
   padding: 3px;
   cursor: pointer;
+  color: var(--control-btns-icon-color)
 }
 .btn:hover {
   background-color: var(--btn-shine-color);
@@ -55,6 +57,6 @@
   width: 15px;
   height: 9px; 
   transform: rotate(320deg) translateX(5px) translateY(1px);
-  border-bottom: 4px solid black;
-  border-left: 3px solid black;
+  border-bottom: 4px solid var(--control-btns-icon-color);
+  border-left: 3px solid var(--control-btns-icon-color);
 }

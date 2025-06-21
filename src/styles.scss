@@ -2,54 +2,85 @@
 @import './reset.scss';
 
 :root {
-  --dark-blue-color: #0D3241;
-  --dirty-gray-color: #525455;
-  --skin-color: #FFDFDB;
+  --background-color-one: #0D3241;
+  --background-color-two: #525455;
   --dark-color: #181A1A;
   --dark-gray-color:  #242E33;
   --white-color: white;
-  --btn-color: #8F9093;
+  
+  --main-text-color: hsl(7, 100%, 93%);
+  --add-todo-btn-color: black;
+  --add-todo-btn-bg-color: hsl(7, 100%, 93%);
+  --input-text-color: white;
+  --todo-bg-color: #181A1A;
+  --task-text-color: black;
+  --color-moto:
   --btn-shine-color: #949FA4;
+  --btn-bg-color: #8F9093;
+  --control-btns-icon-color: black;
 }
 
+.blue-theme {
+  --background-color-one: #0D3241;
+  --background-color-two: #525455;
+  --main-text-color:  hsl(7, 100%, 93%);
+}
+.white-theme {
+  --background-color-one: #D4F1FF;
+  --background-color-two: #FEFEFF;
+  --main-text-color:  black;
+  --todo-bg-color: #AEB1B4;
+  --task-text-color: black;
+  --add-todo-btn-bg-color: white;
+  --add-todo-btn-color: black;
+  --btn-bg-color: white;
+  --control-btns-icon-color: black;
+  --input-text-color: black;
+}
+.green-theme {
+  --background-color-one: #001316;
+  --background-color-two: #001316;
+  --todo-bg-color: #01394C;
+  --task-text-color: white;
+  --add-todo-btn-bg-color: #002837;
+  --add-todo-btn-color: white;
+  --main-text-color: white;
+  --btn-bg-color: #002837;
+  --control-btns-icon-color: white;
+}
 body {
   height: 100vh;
   font-family: 'Work Sans', sans-serif, Arial;
+  background-image: linear-gradient(
+    to right, 
+    var(--background-color-one),
+    var(--background-color-two)
+  );
 }
-
 .themes {
   align-self: flex-end;
   display: flex;
   gap: 10px;
   margin-bottom: 70px;
 }
-
 .theme {
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  border: 1px solid rgb(252, 252, 252);
+  border: 1px solid rgb(196, 196, 196);
   cursor: pointer;
 }
 .first-theme {
   background-image: linear-gradient(
-    to right, 
-    var(--dark-blue-color),
-    var(--dirty-gray-color)
+    to right, #0D3241, #525455
   );
 }
 .second-theme {
   background-image: linear-gradient(
-    to right, 
-    var(--dark-blue-color),
-    var(--dirty-gray-color)
+    to right,  #FEFEFF, #D4F1FF
   );
 }
 
 .third-theme {
-  background-image: linear-gradient(
-    to right, 
-    var(--dark-blue-color),
-    var(--dirty-gray-color)
-  );
+  background-image:#002837;
 }

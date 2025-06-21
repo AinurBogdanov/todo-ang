@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Todo } from '../../interfaces/todo';
-import { StorageService } from '../../services/storage.service';
+import { StorageService } from '../../services/storage/storage.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -32,7 +32,6 @@ export class TodoListComponent {
 
     this.updateParent();
     console.log(this.todoList)
-    //сделать эмит события для того чтобы туду удалялся из обоих переменных
   }
 
   updateParent() {

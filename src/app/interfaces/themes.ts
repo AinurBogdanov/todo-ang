@@ -1,0 +1,1 @@
+export type Theme = 'white-theme' | 'green-theme' | 'blue-theme';

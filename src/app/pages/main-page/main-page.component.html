@@ -1,7 +1,19 @@
 <div class="themes">
-  <div class="theme first-theme"></div>
-  <div class="theme second-theme"></div>
-  <div class="theme third-theme"></div>
+  <button 
+    (click)="setTheme('green-theme')" 
+    class="theme first-theme"
+  ></button>
+
+  <button 
+    (click)="setTheme('white-theme')"
+    class="theme second-theme"
+  ></button>
+
+  <button 
+    class="theme third-theme"
+    (click)="setTheme('blue-theme')"
+  ></button>
+
 </div>
 <h1 class="moto">Just do it.|</h1>
 <div class="input-cont">
@@ -12,6 +24,7 @@
     #input
   >
   <button 
+    type="submit"
     class="add-todo-btn"
     (click)="addTodo(input.value)"
   >
