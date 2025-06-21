@@ -15,8 +15,7 @@
   position: relative;
   font-weight: 400;
   font-size: 20px;
-  color: var(--task-text-color);
-  color: var(--skin-color);
+  color: var(--input-text-color);
 }
 .todo__task::after {
   content: '';
