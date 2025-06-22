@@ -39,13 +39,14 @@ export class MainPageComponent {
     this.storageService.saveToStorage(this.todos)
   }
 
-  onUpdate(newVal: Todo[]) {
-    this.todos = newVal
-  }
+  onUpdate(updatedTodos: Todo[]) {
+    this.todos = updatedTodos;
+    this.storageService.saveToStorage(updatedTodos);
+  };
 
   setTheme(theme: Theme) {
     this.themeServise.setTheme(theme);
-  }
+  };
 }
 
 
