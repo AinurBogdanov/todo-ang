@@ -1,3 +1,4 @@
+// Ипорт рендерера
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { Theme } from '../../interfaces/themes'
 
@@ -5,20 +6,19 @@ import { Theme } from '../../interfaces/themes'
   providedIn: 'root'
 })
 export class ThemesService {
+  // Создаем переменную для рендерера
   private render: Renderer2;
-  private currentTheme = 'blue-theme';
 
   constructor(renderFactory: RendererFactory2) {
+    // Создаеться рендерер
     this.render = renderFactory.createRenderer(null, null);
   }
 
   setTheme(theme: Theme) {
-    this.currentTheme = theme;
-    
+    // используем методы рендерера
     this.render.removeClass(document.body, 'blue-theme');
     this.render.removeClass(document.body, 'green-theme');
     this.render.removeClass(document.body, 'white-theme');
-    
     
     this.render.addClass(document.body, theme);
   

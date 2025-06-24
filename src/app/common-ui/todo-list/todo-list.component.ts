@@ -12,7 +12,6 @@ export class TodoListComponent {
   @Input() todoList: Todo[] = []
   @Output() updateList = new EventEmitter<Todo[]>()
 
-
   constructor(private storageService: StorageService) {}
 
   markAsDone(todo: Todo) {
@@ -31,7 +30,6 @@ export class TodoListComponent {
     this.storageService.saveToStorage(this.todoList);
 
     this.updateParent();
-    console.log(this.todoList)
   }
 
   updateParent() {

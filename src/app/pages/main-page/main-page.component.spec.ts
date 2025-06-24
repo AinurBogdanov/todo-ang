@@ -9,19 +9,29 @@ import { Theme } from '../../interfaces/themes';
 import { By } from '@angular/platform-browser';
 
 describe('MainPageComponent', () => {
+  // ОБЬЯВЛЕНИЕ НЕОБХОДИМЫЙ ДЛЯ ТЕСТОВ КОМПОНЕНТОВ
   let component: MainPageComponent;
-  let fixture: ComponentFixture<MainPageComponent>;
   let storageService: StorageService;
   let themesService: ThemesService
+  
+  let fixture: ComponentFixture<MainPageComponent>;
 
+  // МОКОВЫЕ ЗНАЧЕНИЯ
   const mockTodos: Todo[] = [
     { id: '1', task: 'Test task 1', isDone: false},
     { id: '2', task: 'Test task 2', isDone: true}
   ]
 
+
+  // НАСТРОЙКА ХУКА
   beforeEach(async () => {
+
+    //КОНФИГУРАЦИЯ ТЕСТОВОГО МОДУЛЯ
     await TestBed.configureTestingModule({
+      // ИМПОРТ НЕОБХОДИМЫХ КОМПОНЕНТОВ В КОНФИГ
       imports: [MainPageComponent, TodoListComponent],
+
+      //МОКАЕМ СЕРВИСЫ И ВЕШАЕМ ШПИОНОВ
       providers: [
         {
           provide: StorageService,
@@ -38,13 +48,20 @@ describe('MainPageComponent', () => {
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MainPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    // ПОЛУЧЕНИЕ ПОТОМКОВ ЗАМОКАНЫХ СЕРВИСОВ
     storageService = TestBed.inject(StorageService);
     themesService = TestBed.inject(ThemesService);
+    
+    // СОЗДАНИЕ ФИКСТУРЫ ГЛАВНОГО КОМПОНЕНТА
+    fixture = TestBed.createComponent(MainPageComponent);
+    component = fixture.componentInstance;
+
+    // ЗАПУСК ЖИЗНЕНОГО ЦИКЛА КОМПОНЕНТА
+    fixture.detectChanges();
   });
 
+
+  // САМИ ТЕСТЫ
   describe('Initialization', () => {
     it('should load todos from storage on itit', () => {
       expect(storageService.loadFromStorage).toHaveBeenCalled();
@@ -103,12 +120,14 @@ describe('MainPageComponent', () => {
     it('should call addTodo when fotm is submited', fakeAsync(() => {
       spyOn(component, 'addTodo');
       
+      //ПОЛУЧЕНИЕ HTML ЭЛЕМЕНТОВ ИЗ ФИКСТУРЫ
       const input = fixture.debugElement.query(By.css('.todo-input'));
       const button = fixture.debugElement.query(By.css('.add-todo-btn'));
 
       expect(input).toBeTruthy('Input element not found');
       expect(button).toBeTruthy('Button element not Found')
 
+      
       input.nativeElement.value = 'Test task';
       input.nativeElement.dispatchEvent(new Event('input'));
       fixture.detectChanges();
