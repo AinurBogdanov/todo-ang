@@ -1,5 +1,3 @@
-import { TestBed } from '@angular/core/testing';
-
 import { StorageService } from './storage.service';
 import { Todo } from '../../interfaces/todo';
 
@@ -23,8 +21,8 @@ describe('StorageService', () => {
   describe('save to storage', () => {
     it('should have todos in localStorage', () => {
       service.saveToStorage(mockTodos);
-
       const rawData = localStorage.getItem('todoList');
+
       expect(rawData).toBeTruthy();
 
       const savedTodos = JSON.parse(rawData as string);
