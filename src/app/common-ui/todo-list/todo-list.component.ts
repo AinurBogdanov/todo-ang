@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { Todo } from '../../interfaces/todo';
 import { StorageService } from '../../services/storage/storage.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-todo-list',
@@ -9,30 +10,44 @@ import { StorageService } from '../../services/storage/storage.service';
   styleUrl: './todo-list.component.scss'
 })
 export class TodoListComponent {
-  @Input() todoList: Todo[] = []
-  @Output() updateList = new EventEmitter<Todo[]>()
+  @Input() todoList: Todo[] = [];
+  @Output() emiter = new EventEmitter<Todo[]>();
+  
 
-  constructor(private storageService: StorageService) {}
+  constructor(
+    private storageService: StorageService,
+    private http: HttpClient
+  ) {}
 
-  markAsDone(todo: Todo) {
-    todo.isDone = !todo.isDone;
+  ngOnInit() {
+    this.loadTodos();
+    console.log(this.todoList)
+  } 
 
-    this.storageService.saveToStorage(this.todoList);
+  private getApiUrl():string {
+    return 'http://localhost:3000/todos';
   }
   
-  deleteTodo(todo: Todo) {
-    const id = todo.id 
-    const newList = this.todoList.filter((todo) => {
-      return todo.id !== id;
+  loadTodos() {
+    this.http.get<Todo[]>(this.getApiUrl())
+    .subscribe({
+      next: (data) => this.todoList = data,
+      error: (err) => console.error('Ошибка загрузки' , err)
     });
-
-    this.todoList = newList;
-    this.storageService.saveToStorage(this.todoList);
-
-    this.updateParent();
   }
 
-  updateParent() {
-    this.updateList.emit(this.todoList)
+  addTodo(title: string) {
+    this.http.post<Todo>(this.getApiUrl(), { title: title }).subscribe({
+      next: () => {
+        this.loadTodos();
+      },
+      error: (err) => console.error('Ошибка добавления:', err)
+    });
+    console.log('good')
   }  
+
+  updateList() {
+    const data = this.todoList;
+    this.emiter.emit(data)
+  }
 }

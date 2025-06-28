@@ -1,11 +1,9 @@
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
-import { TodoListComponent } from "../../common-ui/todo-list/todo-list.component";
+import { TodoListComponent } from '../../common-ui/todo-list/todo-list.component';
 import { Todo } from '../../interfaces/todo';
 import { StorageService } from '../../services/storage/storage.service';
-import { v4 as uuidv4 } from 'uuid';
 import { ThemesService } from '../../services/themes/themes.service';
 import { Theme } from '../../interfaces/themes';
-import { DataService } from '../../services/data/data.service';
 
 @Component({
   selector: 'app-main-page',
@@ -16,51 +14,27 @@ import { DataService } from '../../services/data/data.service';
 })
 export class MainPageComponent {
   todos: Todo[] = [];
-  private dataService = inject(DataService);
-
   @ViewChild('input') todoInput!: ElementRef<HTMLInputElement>;
+  @ViewChild(TodoListComponent) todoListComponent!:TodoListComponent
 
+  addTodo(title: string) {
+    if(this.todoListComponent) {
+     this.todoListComponent.addTodo(title);
+    }
+  }
 
   constructor(private storageService: StorageService, private themeServise: ThemesService) {
     this.todos = this.storageService.loadFromStorage()
   }
 
-  addTodo(task: string) {
-    if(!task.trim()) {
-      alert('enter task') 
-      return
-    }
-    const newTodo = {
-      id: uuidv4(),
-      task: task,
-      isDone: false
-    };
-    
-    this.todoInput.nativeElement.value = '';
 
-    this.todos = [...this.todos, newTodo];
-    this.storageService.saveToStorage(this.todos)
-
-    this.getTodos();
-  }
-
-  onUpdate(updatedTodos: Todo[]) {
-    this.todos = updatedTodos;
-    this.storageService.saveToStorage(updatedTodos);
+  onUpdate(data: Todo[]) {
+    this.todos = data;
   };
 
   setTheme(theme: Theme) {
     this.themeServise.setTheme(theme);
   };
-
-  getTodos() {
-    this.dataService.postData();
-
-    this.dataService.getData()
-    .subscribe((val) => {
-      console.log(val)
-    });
-  }
 }
 
 
