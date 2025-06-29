@@ -46,6 +46,18 @@ export class TodoListComponent {
     console.log('good')
   }  
 
+  deleteTodo(id: number) {
+  
+    this.http.delete(`${this.getApiUrl()}/${id}`).subscribe({
+      next: () => {
+        // Удаляем задачу из локального массива (без перезагрузки)
+        this.todoList = this.todoList.filter(todo => todo.id !== id);
+      },
+      error: (err) => console.error('Ошибка удаления:', err)
+    });
+  
+  }
+
   updateList() {
     const data = this.todoList;
     this.emiter.emit(data)
