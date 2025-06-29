@@ -30,12 +30,10 @@ export class TodoListComponent {
     this.http.get<Todo[]>(this.getApiUrl())
     .subscribe({
       next: (data) => {
-        this.todoList = data,
-        console.log(this.todoList);
+        this.todoList = data
       },
       error: (err) => console.error('Ошибка загрузки' , err)
     });
-    console.log(this.todoList.map(todo => todo.id));
   }
 
   addTodo(title: string) {
@@ -45,7 +43,6 @@ export class TodoListComponent {
       },
       error: (err) => console.error('Ошибка добавления:', err)
     });
-    console.log('todoAdded')
   }  
 
   deleteTodo(id: number) {
@@ -69,13 +66,10 @@ export class TodoListComponent {
       },
       error: (err) => console.log('faild patching todo', err)
     });
-  
-    console.log('status changed')
   }
   
   updateList() {
     const data = this.todoList;
-    this.emiter.emit(data)
-    
+    this.emiter.emit(data)  
   }
 }
