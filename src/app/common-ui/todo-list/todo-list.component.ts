@@ -13,15 +13,13 @@ export class TodoListComponent {
   @Input() todoList: Todo[] = [];
   @Output() emiter = new EventEmitter<Todo[]>();
   
-
   constructor(
     private storageService: StorageService,
     private http: HttpClient
   ) {}
 
-  ngOnInit() {
-    this.loadTodos();
-    console.log(this.todoList)
+  async ngOnInit() {
+    this.loadTodos()
   } 
 
   private getApiUrl():string {
@@ -31,9 +29,13 @@ export class TodoListComponent {
   loadTodos() {
     this.http.get<Todo[]>(this.getApiUrl())
     .subscribe({
-      next: (data) => this.todoList = data,
+      next: (data) => {
+        this.todoList = data,
+        console.log(this.todoList);
+      },
       error: (err) => console.error('Ошибка загрузки' , err)
     });
+    console.log(this.todoList.map(todo => todo.id));
   }
 
   addTodo(title: string) {
@@ -43,11 +45,10 @@ export class TodoListComponent {
       },
       error: (err) => console.error('Ошибка добавления:', err)
     });
-    console.log('good')
+    console.log('todoAdded')
   }  
 
   deleteTodo(id: number) {
-  
     this.http.delete(`${this.getApiUrl()}/${id}`).subscribe({
       next: () => {
         // Удаляем задачу из локального массива (без перезагрузки)
@@ -55,11 +56,26 @@ export class TodoListComponent {
       },
       error: (err) => console.error('Ошибка удаления:', err)
     });
-  
   }
 
+  changeStatusTodo(id: number) {
+    const activeTodo =  this.todoList.filter(todo => todo.id === id);
+    this.http.patch(
+      `${this.getApiUrl()}/${id}`,
+      { completed:  !activeTodo[0].completed }
+    ).subscribe({
+      next: () => {
+        this.loadTodos();
+      },
+      error: (err) => console.log('faild patching todo', err)
+    });
+  
+    console.log('status changed')
+  }
+  
   updateList() {
     const data = this.todoList;
     this.emiter.emit(data)
+    
   }
 }

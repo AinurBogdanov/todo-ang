@@ -8,6 +8,7 @@
     <div class="todo__controller">
         <button
           class="btn btn--done"
+          (click)="changeStatusTodo(todo.id)"
         ></button>
         <button
           class="btn btn--delete"

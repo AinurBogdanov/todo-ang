@@ -30,6 +30,7 @@ export class MainPageComponent {
 
   onUpdate(data: Todo[]) {
     this.todos = data;
+    console.log(this.todos)
   };
 
   setTheme(theme: Theme) {
