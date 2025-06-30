@@ -1,0 +1,40 @@
+<form 
+  class="form-ang"
+  [formGroup]="registerForm"
+  (ngSubmit)="onSubmit()"
+>
+  <mat-form-field appearance="outline">
+    <mat-label>Имя пользователя</mat-label>
+    <input 
+      matInput 
+      formControlName="username" 
+      placeholder="Введите ваш никнейм"
+    >
+    <mat-icon matPrefix>person</mat-icon>
+    <mat-error *ngIf="registerForm.get('username')?.hasError('required')">
+      Поле обязательно для заполнения
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Пароль</mat-label>
+    <input 
+      matInput 
+      formControlName="password" 
+      placeholder="Введите ваш пароль"
+    >
+    <mat-icon matPrefix>vpn_key</mat-icon>
+    <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
+      Поле обязательно для заполнения
+    </mat-error>
+  </mat-form-field>
+
+  <button 
+    mat-raised-button 
+    color="primary" 
+    type="submit"
+    [disabled]="registerForm.invalid"
+    >
+    Зарегистрироваться
+  </button>
+</form>

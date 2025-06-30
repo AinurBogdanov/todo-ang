@@ -1,5 +1,6 @@
 @import './fonts.scss';
 @import './reset.scss';
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
 
 :root {
   --background-color-one: #0D3241;
@@ -7,7 +8,7 @@
   --dark-color: #181A1A;
   --dark-gray-color:  #242E33;
   --white-color: white;
-  
+
   --main-text-color: hsl(7, 100%, 93%);
   --add-todo-btn-color: black;
   --add-todo-btn-bg-color: hsl(7, 100%, 93%);
@@ -59,10 +60,8 @@ body {
   );
 }
 .themes {
-  align-self: flex-end;
   display: flex;
   gap: 10px;
-  margin-bottom: 70px;
 }
 .theme {
   border-radius: 50%;
@@ -85,3 +84,6 @@ body {
 .third-theme {
   background-color:#042c20;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
