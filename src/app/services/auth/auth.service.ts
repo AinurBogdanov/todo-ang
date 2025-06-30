@@ -19,8 +19,8 @@ export class AuthService {
     return this.http.post(`${this.API_URL}/register`, { username, password})
       .pipe(
         tap((response: any) => {
-            if(response.token) {
-              this.saveToken(response.token);
+            if(response.access_token) {
+              this.saveToken(response.access_token);
             }
           }  
         )
