@@ -9,7 +9,6 @@ export class AuthService {
   private readonly API_URL = 'http://localhost:3000/auth';
   private TOKEN_KEY = 'auth_token';
 
-
   constructor(private http: HttpClient) { }
 
   register(username: string, password: string) {
@@ -44,8 +43,8 @@ export class AuthService {
     return this.http.post(`${this.API_URL}/login`, { username, password })
       .pipe(
         tap((response: any) => {
-          if(response.token) {
-            this.saveToken(response.token)
+          if(response.access_token) {
+            this.saveToken(response.access_token)
           }
         })
       )
