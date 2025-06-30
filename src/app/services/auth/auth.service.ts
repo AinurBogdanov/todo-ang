@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AuthService {
   private readonly API_URL = 'http://localhost:3000/auth';
-  private TOKEN_KEY = 'auth_token';
+  private TOKEN_KEY = 'access_token';
 
   constructor(
     private http: HttpClient,
@@ -32,7 +32,7 @@ export class AuthService {
   } 
 
   logout(): void {
-    localStorage.removeItem(this.TOKEN_KEY); // Удаляем токен при выходе
+    // Удаляем токен при выходе
   }
 
   logIn(username: string, password: string) {
@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   private saveToken(token: string): void {
-    this.cookieService.set('access_token', token, {
+    this.cookieService.set(this.TOKEN_KEY, token, {
       expires: 1,
       path: '/',
       secure: true,
