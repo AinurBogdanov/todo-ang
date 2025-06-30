@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,10 @@ export class AuthService {
   private readonly API_URL = 'http://localhost:3000/auth';
   private TOKEN_KEY = 'auth_token';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService
+  ) {}
 
   register(username: string, password: string) {
     return this.http.post(`${this.API_URL}/register`, { username, password})
@@ -22,14 +26,6 @@ export class AuthService {
         )
       )
   };
-
-  private saveToken(token: string): void {
-    localStorage.setItem(this.TOKEN_KEY, token)
-  }
-
-  getToken(): string | null{
-    return localStorage.getItem(this.TOKEN_KEY)
-  }
 
   isAuthenticated(): boolean {
     return !!this.getToken(); // Проверяем наличие токена
@@ -48,5 +44,18 @@ export class AuthService {
           }
         })
       )
+  }
+
+  private saveToken(token: string): void {
+    this.cookieService.set('access_token', token, {
+      expires: 1,
+      path: '/',
+      secure: true,
+      sameSite: 'Strict'
+    })
+  }
+
+  getToken(): string | null{
+    return this.cookieService.get(this.TOKEN_KEY)
   }
 }
