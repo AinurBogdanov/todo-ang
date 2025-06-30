@@ -1,8 +1,11 @@
 :host {
   display: block;
-  width: 45%;
-  max-width: 350px;
+  width: 50%;
+  max-width: 500px;
+  background-color: rgb(235, 244, 255);
+  padding: 40px;
 }
+@import url(../../margins.scss);
 .form-ang {
   display: flex;
   flex-direction: column;

@@ -31,6 +31,9 @@ import { NgIf } from '@angular/common';
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
 
+  isLoginMode = true;
+  hidePassword = true;
+
   constructor(
     private authService: AuthService,
     private fb: FormBuilder
@@ -46,27 +49,33 @@ export class RegisterComponent implements OnInit {
   onSubmit () {
     const { username, password } = this.registerForm.value;
 
-     this.authService.logIn(username, password)
-      .subscribe({
-        next: (response) => {
-          console.log('вход успешен!', response);
-          // перенаправить на страницу todo
-        },
-        error: (err)=> {
-          console.error('ошибка:', err)
-        }
-      })
+    if(this.isLoginMode) {
+      this.authService.logIn(username, password)
+       .subscribe({
+         next: (response) => {
+           console.log('вход успешен!', response);
+           // перенаправить на страницу todo
+         },
+         error: (err)=> {
+           console.error('ошибка:', err)
+         }
+        })
+    } else {
+      this.authService.register(username, password)
+        .subscribe({
+          next: (response) => {
+            console.log('Регестрация и авторизация успешны!', response);
+            // перенаправить на страницу todo
+          },
+          error: (err)=> {
+            console.error('ошибка:', err)
+          }
+        })
+    }
 
-    // this.authService.register(username, password)
-    //   .subscribe({
-    //     next: (response) => {
-    //       console.log('Регестрация и авторизация успешны!', response);
-    //       // перенаправить на страницу todo
-    //     },
-    //     error: (err)=> {
-    //       console.error('ошибка:', err)
-    //     }
-    //   })
+
+    
+
   }
 }
 

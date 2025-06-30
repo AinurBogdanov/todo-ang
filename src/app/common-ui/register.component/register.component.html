@@ -3,7 +3,20 @@
   [formGroup]="registerForm"
   (ngSubmit)="onSubmit()"
 >
-  <mat-form-field appearance="outline">
+  <div class="mode-switch mb12">
+    <button 
+      mat-stroked-button 
+      type="button" 
+      (click)="isLoginMode = !isLoginMode"
+    >
+      {{ isLoginMode ? 'Нет аккаунта? Зарегистрироваться' : 'Уже есть аккаунт? Войти' }}
+    </button>
+  </div>
+
+  <mat-form-field 
+    appearance="outline" 
+    class="mb12"
+  >
     <mat-label>Имя пользователя</mat-label>
     <input 
       matInput 
@@ -16,7 +29,10 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
+  <mat-form-field 
+    appearance="outline" 
+    class="mb12"
+  >
     <mat-label>Пароль</mat-label>
     <input 
       matInput 
@@ -35,6 +51,6 @@
     type="submit"
     [disabled]="registerForm.invalid"
     >
-    Зарегистрироваться
+    {{ isLoginMode ? 'Войти' : 'Зарегистрироваться' }}
   </button>
 </form>

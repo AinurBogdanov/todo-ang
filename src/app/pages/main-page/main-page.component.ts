@@ -16,6 +16,7 @@ import { NgIf } from '@angular/common';
 })
 export class MainPageComponent {
   showRegisterForm: boolean = false;
+
   todos: Todo[] = [];
   @ViewChild('input') todoInput!: ElementRef<HTMLInputElement>;
   @ViewChild(TodoListComponent) todoListComponent!:TodoListComponent
