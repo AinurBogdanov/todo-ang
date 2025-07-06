@@ -13,16 +13,19 @@ export class AuthService {
   private readonly http = inject(HttpClient);
   private readonly cookieService = inject(CookieService);
 
+  // prettier-ignore
   register(username: string, password: string) {
     return this.http
-      .post(`${this.API_URL}/register`, { username, password })
-      .pipe(
-        tap((response: any) => {
-          if (response.access_token) {
-            this.saveToken(response.access_token);
-          }
-        })
-      );
+    .post(
+        `${this.API_URL}/register`,
+        { username, password }
+      ).pipe(
+      tap((response: any) => {
+        if (response.access_token) {
+          this.saveToken(response.access_token);
+        }
+      })
+    );
   }
 
   isAuthenticated(): boolean {

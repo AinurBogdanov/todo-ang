@@ -1,56 +1,29 @@
-<form 
-  class="form-ang"
-  [formGroup]="registerForm"
-  (ngSubmit)="onSubmit()"
->
+<form class="form-ang" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <div class="mode-switch mb12">
-    <button 
-      mat-stroked-button 
-      type="button" 
-      (click)="isLoginMode = !isLoginMode"
-    >
+    <button mat-stroked-button type="button" (click)="isLoginMode = !isLoginMode">
       {{ isLoginMode ? 'Нет аккаунта? Зарегистрироваться' : 'Уже есть аккаунт? Войти' }}
     </button>
   </div>
 
-  <mat-form-field 
-    appearance="outline" 
-    class="mb12"
-  >
+  <mat-form-field appearance="outline" class="mb12">
     <mat-label>Имя пользователя</mat-label>
-    <input 
-      matInput 
-      formControlName="username" 
-      placeholder="Введите ваш никнейм"
-    >
+    <input matInput formControlName="username" placeholder="Введите ваш никнейм" />
     <mat-icon matPrefix>person</mat-icon>
     <mat-error *ngIf="registerForm.get('username')?.hasError('required')">
       Поле обязательно для заполнения
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field 
-    appearance="outline" 
-    class="mb12"
-  >
+  <mat-form-field appearance="outline" class="mb12">
     <mat-label>Пароль</mat-label>
-    <input 
-      matInput 
-      formControlName="password" 
-      placeholder="Введите ваш пароль"
-    >
+    <input matInput formControlName="password" placeholder="Введите ваш пароль" />
     <mat-icon matPrefix>vpn_key</mat-icon>
     <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
       Поле обязательно для заполнения
     </mat-error>
   </mat-form-field>
 
-  <button 
-    mat-raised-button 
-    color="primary" 
-    type="submit"
-    [disabled]="registerForm.invalid"
-    >
+  <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">
     {{ isLoginMode ? 'Войти' : 'Зарегистрироваться' }}
   </button>
 </form>

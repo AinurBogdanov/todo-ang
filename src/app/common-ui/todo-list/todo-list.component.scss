@@ -28,7 +28,7 @@
   transition: width 0.5s ease;
 }
 .striked::after {
-  width: 100%; 
+  width: 100%;
 }
 .todo__controller {
   display: flex;
@@ -42,7 +42,7 @@
   background-color: var(--btn-bg-color);
   padding: 3px;
   cursor: pointer;
-  color: var(--control-btns-icon-color)
+  color: var(--control-btns-icon-color);
 }
 .btn:hover {
   background-color: var(--btn-shine-color);
@@ -54,7 +54,7 @@
   content: '';
   display: block;
   width: 15px;
-  height: 9px; 
+  height: 9px;
   transform: rotate(320deg) translateX(5px) translateY(1px);
   border-bottom: 4px solid var(--control-btns-icon-color);
   border-left: 3px solid var(--control-btns-icon-color);
