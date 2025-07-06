@@ -4,7 +4,7 @@ import { Todo } from '../../interfaces/todo';
 import { StorageService } from '../../services/storage/storage.service';
 import { ThemesService } from '../../services/themes/themes.service';
 import { Theme } from '../../interfaces/themes';
-import { RegisterComponent } from "../../common-ui/register.component/register.component";
+import { RegisterComponent } from '../../common-ui/register.component/register.component';
 import { NgIf } from '@angular/common';
 
 @Component({
@@ -12,37 +12,37 @@ import { NgIf } from '@angular/common';
   standalone: true,
   imports: [TodoListComponent, RegisterComponent, NgIf],
   templateUrl: './main-page.component.html',
-  styleUrl: './main-page.component.scss'
+  styleUrl: './main-page.component.scss',
 })
 export class MainPageComponent {
   showRegisterForm: boolean = false;
 
   todos: Todo[] = [];
   @ViewChild('input') todoInput!: ElementRef<HTMLInputElement>;
-  @ViewChild(TodoListComponent) todoListComponent!:TodoListComponent
+  @ViewChild(TodoListComponent) todoListComponent!: TodoListComponent;
+
+  readonly storageService = inject(StorageService);
+  readonly themeServise = inject(ThemesService);
+
+  constructor() {
+    this.todos = this.storageService.loadFromStorage();
+  }
 
   toggleRegisterForm() {
     this.showRegisterForm = !this.showRegisterForm;
   }
 
   addTodo(title: string) {
-    if(this.todoListComponent) {
-     this.todoListComponent.addTodo(title);
+    if (this.todoListComponent) {
+      this.todoListComponent.addTodo(title);
     }
   }
 
-  constructor(private storageService: StorageService, private themeServise: ThemesService) {
-    this.todos = this.storageService.loadFromStorage()
-  }
-
-
   onUpdate(data: Todo[]) {
     this.todos = data;
-  };
+  }
 
   setTheme(theme: Theme) {
     this.themeServise.setTheme(theme);
-  };
+  }
 }
-
-

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 
 // Angular Material Modules
 import { MatInputModule } from '@angular/material/input';
@@ -14,7 +14,7 @@ import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-register',
   imports: [
-     // Material Modules
+    // Material Modules
     MatInputModule,
     MatButtonModule,
     MatIconModule,
@@ -23,69 +23,48 @@ import { NgIf } from '@angular/common';
     MatProgressSpinnerModule,
 
     ReactiveFormsModule,
-    NgIf
+    NgIf,
   ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrl: './register.component.scss',
 })
-export class RegisterComponent implements OnInit {
-  registerForm!: FormGroup;
+export class RegisterComponent {
+  registerForm: FormGroup;
+
+  readonly authService = inject(AuthService);
+  private readonly fb = inject(FormBuilder);
 
   isLoginMode = true;
   hidePassword = true;
 
-  constructor(
-    private authService: AuthService,
-    private fb: FormBuilder
-  ) {}
-
-  ngOnInit(): void {
+  constructor() {
     this.registerForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
   }
-  
-  onSubmit () {
+
+  onSubmit() {
     const { username, password } = this.registerForm.value;
 
-    if(this.isLoginMode) {
-      this.authService.logIn(username, password)
-       .subscribe({
-         next: (response) => {
-           console.log('вход успешен!', response);
-           // перенаправить на страницу todo
-         },
-         error: (err)=> {
-           console.error('ошибка:', err)
-         }
-        })
+    if (this.isLoginMode) {
+      this.authService.logIn(username, password).subscribe({
+        next: (response) => {
+          console.log('вход успешен!', response);
+        },
+        error: (err) => {
+          console.error('ошибка:', err);
+        },
+      });
     } else {
-      this.authService.register(username, password)
-        .subscribe({
-          next: (response) => {
-            console.log('Регестрация и авторизация успешны!', response);
-            // перенаправить на страницу todo
-          },
-          error: (err)=> {
-            console.error('ошибка:', err)
-          }
-        })
+      this.authService.register(username, password).subscribe({
+        next: (response) => {
+          console.log('Регестрация и авторизация успешны!', response);
+        },
+        error: (err) => {
+          console.error('ошибка:', err);
+        },
+      });
     }
   }
 }
-
-// Ainur
-// 18082006
-
-// secAcc
-// 12345
-
-// thirdUser
-// 55555
-
-// thouthUser
-// 22222
-
-// thithUser
-// 1111
