@@ -1,28 +1,14 @@
 <div class="header">
   <div class="reg-btns">
-    <button 
-      (click)="toggleRegisterForm()"
-      class="btn"
-    >
-      Account
-    </button>
+    <button (click)="toggleRegisterForm()" class="btn">Account</button>
   </div>
 
   <div class="themes">
-    <button 
-      (click)="setTheme('blue-theme')" 
-      class="theme first-theme"
-    ></button>
-  
-    <button 
-      (click)="setTheme('white-theme')"
-      class="theme second-theme"
-    ></button>
-  
-    <button 
-      class="theme third-theme"
-      (click)="setTheme('green-theme')"
-    ></button>
+    <button (click)="setTheme('blue-theme')" class="theme first-theme"></button>
+
+    <button (click)="setTheme('white-theme')" class="theme second-theme"></button>
+
+    <button class="theme third-theme" (click)="setTheme('green-theme')"></button>
   </div>
 </div>
 
@@ -33,23 +19,9 @@
 <div *ngIf="!showRegisterForm">
   <h1 class="moto">Just do it.|</h1>
   <div class="input-cont">
-    <input
-      class="todo-input"
-      type="text"
-      placeholder="Add a task."
-      #input
-    >
-    <button 
-      type="submit"
-      class="add-todo-btn"
-      (click)="addTodo(input.value)"
-    >
-      I Got This!
-    </button>
+    <input class="todo-input" type="text" placeholder="Add a task." #input />
+    <button type="submit" class="add-todo-btn" (click)="addTodo(input.value)">I Got This!</button>
   </div>
   <div class="time">11/17/20, 9:20:59 PM</div>
-  <app-todo-list
-  [todoList]="todos"
-  (emiter)="onUpdate($event)"
-  ></app-todo-list>
+  <app-todo-list [todoList]="todos" (emiter)="onUpdate($event)"></app-todo-list>
 </div>
