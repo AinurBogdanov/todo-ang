@@ -12,16 +12,16 @@
   </div>
 </div>
 
-<ng-container *ngIf="showRegisterForm">
-  <app-register></app-register>
-</ng-container>
-
-<div *ngIf="!showRegisterForm">
+@if (showRegisterForm) {
+<app-register></app-register>
+} @else {
+<div>
   <h1 class="moto">Just do it.|</h1>
   <div class="input-cont">
     <input class="todo-input" type="text" placeholder="Add a task." #input />
     <button type="submit" class="add-todo-btn" (click)="addTodo(input.value)">I Got This!</button>
   </div>
   <div class="time">11/17/20, 9:20:59 PM</div>
-  <app-todo-list [todoList]="todos" (emiter)="onUpdate($event)"></app-todo-list>
+  <app-todo-list [todoList]="todos" (emitter)="onUpdate($event)"></app-todo-list>
 </div>
+}
