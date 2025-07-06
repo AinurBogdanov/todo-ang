@@ -1,4 +1,12 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+} from '@angular/core';
 import { Todo } from '../../interfaces/todo';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../services/auth/auth.service';
@@ -9,6 +17,7 @@ import { StorageService } from '../../services/storage/storage.service';
   imports: [],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoListComponent {
   @Input() todoList: Todo[] = [];
@@ -17,8 +26,9 @@ export class TodoListComponent {
   private http = inject(HttpClient);
   private authService = inject(AuthService);
   private storageService = inject(StorageService);
-
   private lastId = 1;
+
+  constructor(private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.loadTodos();
@@ -35,6 +45,8 @@ export class TodoListComponent {
     } else {
       this.todoList = this.storageService.loadFromStorage();
     }
+
+    this.cd.markForCheck();
   }
 
   addTodo(title: string) {
@@ -53,8 +65,9 @@ export class TodoListComponent {
       };
 
       this.todoList.push(newTodo);
-
       this.storageService.saveToStorage(this.todoList);
+
+      this.cd.markForCheck();
     }
   }
 
@@ -92,6 +105,7 @@ export class TodoListComponent {
         this.todoList[index].completed = !this.todoList[index].completed;
       }
     }
+    this.cd.markForCheck();
   }
 
   private getApiUrl(): string {
