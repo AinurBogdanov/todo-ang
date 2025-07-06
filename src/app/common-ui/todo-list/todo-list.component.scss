@@ -27,7 +27,7 @@
   background-color: currentColor;
   transition: width 0.5s ease;
 }
-.striked::after {
+.stroked::after {
   width: 100%;
 }
 .todo__controller {

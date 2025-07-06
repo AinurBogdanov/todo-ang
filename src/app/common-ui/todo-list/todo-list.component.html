@@ -1,6 +1,6 @@
 @for (todo of todoList; track todo.id) {
 <div class="todo">
-  <div class="todo__task" [class.striked]="todo.completed">{{ todo.title }}</div>
+  <div class="todo__task" [class.stroked]="todo.completed">{{ todo.title }}</div>
   <div class="todo__controller">
     <button class="btn btn--done" (click)="changeStatusTodo(todo.id)"></button>
     <button class="btn btn--delete" (click)="deleteTodo(todo.id)">
